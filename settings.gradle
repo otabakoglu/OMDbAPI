@@ -1,0 +1,2 @@
+rootProject.name='OMDbAPI'
+include ':app'
