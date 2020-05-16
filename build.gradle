@@ -26,6 +26,8 @@ buildscript {
         version_view_model_scope = "2.3.0-alpha02"
         version_dagger = "2.25.2"
         version_timber = "4.7.1"
+        version_firebase_config = "19.1.4"
+        version_firebase_analytics = "17.4.1"
     }
     repositories {
         google()
@@ -36,6 +38,7 @@ buildscript {
         classpath "com.android.tools.build:gradle:$version_android_gradle_plugin"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$version_kotlin"
         classpath "android.arch.navigation:navigation-safe-args-gradle-plugin:$version_navigation"
+        classpath 'com.google.gms:google-services:4.3.3'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files

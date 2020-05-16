@@ -6,9 +6,17 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class FilmProperty(
-    @Json(name = "Title") val title: String,
-    @Json(name = "Poster") val poster: String
-) : Parcelable
+    @Json(name = "Title") val title: String?,
+    @Json(name = "Year") val year: String?,
+    @Json(name = "Poster") val poster: String?,
+    @Json(name = "Genre") val genre: String?,
+    @Json(name = "Actors") val actors: String?,
+    @Json(name = "imdbRating") val imdbRating: String?,
+    @Json(name = "Response") val response: String,
+    @Json(name = "Error") val error: String?
+) : Parcelable {
+    fun isResponse() = response == "True"
+}
 
 
 

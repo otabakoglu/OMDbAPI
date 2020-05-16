@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: "androidx.navigation.safeargs"
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -14,6 +15,8 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+
+        multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -94,7 +97,7 @@ dependencies {
     //View Model Scope
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$version_view_model_scope"
 
-    //glide
+    // Glide
     implementation "com.github.bumptech.glide:glide:$version_glide"
 
     // Dagger Core dependencies
@@ -104,6 +107,10 @@ dependencies {
 
     // Timber
     implementation "com.jakewharton.timber:timber:$version_timber"
+
+    // Firebase
+    implementation "com.google.firebase:firebase-config-ktx:$version_firebase_config"
+    implementation "com.google.firebase:firebase-analytics-ktx:$version_firebase_analytics"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

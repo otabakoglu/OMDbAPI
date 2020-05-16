@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/mainFragment">
+    app:startDestination="@id/splashFragment">
 
     <fragment
         android:id="@+id/mainFragment"
@@ -18,7 +18,11 @@
         android:id="@+id/detailFragment"
         android:name="com.otabakoglu.omdbapi.ui.detail.DetailFragment"
         android:label="detail_fragment"
-        tools:layout="@layout/detail_fragment" />
+        tools:layout="@layout/fragment_detail" >
+        <argument
+            android:name="property"
+            app:argType="com.otabakoglu.omdbapi.data.model.FilmProperty" />
+    </fragment>
     <fragment
         android:id="@+id/splashFragment"
         android:name="com.otabakoglu.omdbapi.ui.splash.SplashFragment"

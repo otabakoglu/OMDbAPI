@@ -11,9 +11,12 @@ import androidx.lifecycle.AbstractSavedStateViewModelFactory
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.otabakoglu.omdbapi.OmdbApplication
 
 import com.otabakoglu.omdbapi.R
+import com.otabakoglu.omdbapi.databinding.FragmentMainBinding
+import com.otabakoglu.omdbapi.ui.main.adapter.FilmGridAdapter
 import kotlinx.android.synthetic.main.fragment_main.*
 import javax.inject.Inject
 
@@ -31,15 +34,19 @@ class MainFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val binding = FragmentMainBinding.inflate(inflater)
 
-        viewModel.status.observe(viewLifecycleOwner, Observer {
-            tvResult.text = it
+        // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
+        binding.lifecycleOwner = this
+
+        // Giving the binding access to the OverviewViewModel
+        binding.viewModel = viewModel
+
+        binding.recyclerView.adapter = FilmGridAdapter(FilmGridAdapter.OnClickListener{
+            findNavController().navigate(MainFragmentDirections.actionMainFragmentToDetailFragment(it))
         })
 
-
-
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_main, container, false)
+        return binding.root
     }
 
     override fun onAttach(context: Context) {

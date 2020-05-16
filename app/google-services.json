@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1059262425330",
+    "firebase_url": "https://omdb-681b6.firebaseio.com",
+    "project_id": "omdb-681b6",
+    "storage_bucket": "omdb-681b6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1059262425330:android:61ae947d19cefda800c86b",
+        "android_client_info": {
+          "package_name": "com.otabakoglu.omdbapi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1059262425330-c5rqqskjpfeeb7ki84f4vka5d3j5nms1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXi4Nr0iReejhwNBAxI2Gqgut6bkNq4e4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1059262425330-c5rqqskjpfeeb7ki84f4vka5d3j5nms1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

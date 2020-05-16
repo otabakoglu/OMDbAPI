@@ -5,20 +5,20 @@
 
     <data>
         <variable
-            name="viewModel"
-            type="com.otabakoglu.omdbapi.ui.splash.SplashVM" />
+            name="viewmodel"
+            type="com.otabakoglu.omdbapi.ui.detail.DetailVM" />
     </data>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        tools:context=".ui.splash.SplashFragment">
+        tools:context=".ui.detail.DetailFragment">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@{viewModel.splashText}" />
+            android:text="@{viewmodel.selectedProperty.title}" />
 
     </FrameLayout>
 
