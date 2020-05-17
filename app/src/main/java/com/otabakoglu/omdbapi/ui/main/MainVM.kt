@@ -1,5 +1,6 @@
 package com.otabakoglu.omdbapi.ui.main
 
+import android.text.BoringLayout
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -7,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.otabakoglu.omdbapi.data.model.FilmProperty
 import com.otabakoglu.omdbapi.data.repository.RepositoryImpl
 import com.otabakoglu.omdbapi.data.source.remote.OmdbApiStatus
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import javax.inject.Inject
 
 class MainVM @Inject constructor(private val repository: RepositoryImpl) : ViewModel(){
@@ -20,34 +21,43 @@ class MainVM @Inject constructor(private val repository: RepositoryImpl) : ViewM
     val properties: LiveData<List<FilmProperty>>
         get() = _properties
 
-    init {
-        getFilm()
+    private var debounce: Boolean = true
+
+    fun clearList(){
+        _properties.value = emptyList()
     }
 
-    private fun getFilm(){
+    fun getFilm(title: String){
 
-        viewModelScope.launch {
+                viewModelScope.launch {
+                        try {
 
-            try {
-                _status.value = OmdbApiStatus.LOADING
+                            _status.value = OmdbApiStatus.LOADING
 
-                val result = repository.getFilmByTitleAsync("joker").await()
+                            val result = repository.getFilmByTitleAsync(title).await()
+                            debounce = true
 
-                if(result.isResponse()){
-                    val films: List<FilmProperty> = listOf(result)
-                    _properties.value = films
-                    _status.value = OmdbApiStatus.DONE
-                }else{
-                    _status.value = OmdbApiStatus.FILM_NOT_FOUND
-                }
 
-                println(result.toString())
+                            if(result.isResponse()){
+                                val films: List<FilmProperty> = listOf(result)
+                                _properties.value = films
+                                _status.value = OmdbApiStatus.DONE
+                            }else{
+                                _properties.value = emptyList()
+                                _status.value = OmdbApiStatus.FILM_NOT_FOUND
+                            }
 
-            }catch (exception: Exception){
-                _status.value = OmdbApiStatus.ERROR
-                println(exception)
-            }
+                            println(result.toString())
+
+                        }catch (exception: Exception){
+                            _properties.value = emptyList()
+                            _status.value = OmdbApiStatus.ERROR
+                            println(exception)
+                        }
+
 
         }
+
     }
+
 }
