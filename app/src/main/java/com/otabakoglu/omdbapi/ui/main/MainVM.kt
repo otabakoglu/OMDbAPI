@@ -35,7 +35,7 @@ class MainVM @Inject constructor(private val repository: RepositoryImpl) : ViewM
                 val result = repository.getFilmByTitleAsync(title).await()
 
                 if (result.isResponse()) {
-                    val films: List<FilmProperty> = listOf(result,result,result,result,result,result,result,result)
+                    val films: List<FilmProperty> = listOf(result)
                     _properties.value = films
                     _status.value = OmdbApiStatus.DONE
                 } else {

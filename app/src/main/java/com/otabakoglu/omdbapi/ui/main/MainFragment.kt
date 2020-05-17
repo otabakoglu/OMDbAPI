@@ -47,6 +47,9 @@ class MainFragment : Fragment(), SearchView.OnQueryTextListener {
         })
         setHasOptionsMenu(true)
         showActionBar()
+
+        requireActivity().window.setBackgroundDrawableResource(R.color.white)
+
         return binding.root
     }
 
