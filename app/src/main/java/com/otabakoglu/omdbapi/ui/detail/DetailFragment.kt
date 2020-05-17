@@ -10,7 +10,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.otabakoglu.omdbapi.OmdbApplication
 
-import com.otabakoglu.omdbapi.R
 import com.otabakoglu.omdbapi.databinding.FragmentDetailBinding
 import javax.inject.Inject
 
@@ -26,8 +25,10 @@ class DetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val property = DetailFragmentArgs.fromBundle(requireArguments()).property
-        viewModel.setProperty(property)
+        arguments?.let {
+            val property = DetailFragmentArgs.fromBundle(requireArguments()).property
+            viewModel.setProperty(property)
+        }
 
         val binding = FragmentDetailBinding.inflate(inflater)
 

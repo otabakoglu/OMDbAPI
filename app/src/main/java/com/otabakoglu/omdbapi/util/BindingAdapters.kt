@@ -46,7 +46,11 @@ fun bindStatus(imageView: ImageView, status: OmdbApiStatus?){
 
         OmdbApiStatus.FILM_NOT_FOUND -> {
             imageView.visibility = View.VISIBLE
-            imageView.setImageResource(R.drawable.ic_launcher)
+            imageView.setImageResource(R.drawable.ic_not_found)
+        }
+        else -> {
+            imageView.visibility = View.VISIBLE
+            imageView.setImageResource(R.drawable.ic_search_24dp)
         }
     }
 }

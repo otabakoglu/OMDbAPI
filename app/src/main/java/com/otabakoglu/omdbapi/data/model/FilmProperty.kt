@@ -11,6 +11,7 @@ data class FilmProperty(
     @Json(name = "Poster") val poster: String?,
     @Json(name = "Genre") val genre: String?,
     @Json(name = "Actors") val actors: String?,
+    @Json(name = "Plot") val plot: String?,
     @Json(name = "imdbRating") val imdbRating: String?,
     @Json(name = "Response") val response: String,
     @Json(name = "Error") val error: String?

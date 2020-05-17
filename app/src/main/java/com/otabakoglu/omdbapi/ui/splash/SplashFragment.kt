@@ -6,13 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.otabakoglu.omdbapi.OmdbApplication
 
-import com.otabakoglu.omdbapi.R
 import com.otabakoglu.omdbapi.databinding.FragmentSplashBinding
 import javax.inject.Inject
 
@@ -37,6 +37,7 @@ class SplashFragment : Fragment() {
 
         subscribeNavigateMainFragment()
 
+        hideActionBar()
         return binding.root
     }
 
@@ -47,6 +48,10 @@ class SplashFragment : Fragment() {
 
     private fun injectDagger(){
         (requireActivity().application as OmdbApplication).appComponent.inject(this)
+    }
+
+    private fun hideActionBar(){
+        (activity as AppCompatActivity).supportActionBar?.hide()
     }
 
     private fun subscribeNavigateMainFragment(){

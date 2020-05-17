@@ -13,7 +13,7 @@ class DetailVM @Inject constructor(): ViewModel() {
     val selectedProperty: LiveData<FilmProperty>
         get() = _selectedProperty
 
-    fun setProperty(property: FilmProperty) {
+    fun setProperty(property: FilmProperty?) {
         _selectedProperty.value = property
     }
 }

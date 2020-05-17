@@ -3,12 +3,10 @@ package com.otabakoglu.omdbapi.ui.main
 import android.content.Context
 import android.os.Bundle
 import android.view.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.AbstractSavedStateViewModelFactory
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.otabakoglu.omdbapi.OmdbApplication
@@ -16,8 +14,6 @@ import com.otabakoglu.omdbapi.OmdbApplication
 import com.otabakoglu.omdbapi.R
 import com.otabakoglu.omdbapi.databinding.FragmentMainBinding
 import com.otabakoglu.omdbapi.ui.main.adapter.FilmGridAdapter
-import kotlinx.android.synthetic.main.fragment_main.*
-import kotlinx.coroutines.delay
 import javax.inject.Inject
 
 /**
@@ -36,17 +32,21 @@ class MainFragment : Fragment(), SearchView.OnQueryTextListener {
     ): View? {
         val binding = FragmentMainBinding.inflate(inflater)
 
-        // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
+        // Allows Data Binding to Observe LiveData with Main Fragment lifecycle
         binding.lifecycleOwner = this
 
-        // Giving the binding access to the OverviewViewModel
+        // Binding View Model to the MainFragment
         binding.viewModel = viewModel
 
-        binding.recyclerView.adapter = FilmGridAdapter(FilmGridAdapter.OnClickListener{
-            findNavController().navigate(MainFragmentDirections.actionMainFragmentToDetailFragment(it))
+        binding.recyclerView.adapter = FilmGridAdapter(FilmGridAdapter.OnClickListener {
+            findNavController().navigate(
+                MainFragmentDirections.actionMainFragmentToDetailFragment(
+                    it
+                )
+            )
         })
-
         setHasOptionsMenu(true)
+        showActionBar()
         return binding.root
     }
 
@@ -55,7 +55,11 @@ class MainFragment : Fragment(), SearchView.OnQueryTextListener {
         injectDagger()
     }
 
-    private fun injectDagger(){
+    private fun showActionBar(){
+        (activity as AppCompatActivity).supportActionBar?.show()
+    }
+
+    private fun injectDagger() {
         (requireActivity().application as OmdbApplication).appComponent.inject(this)
     }
 
@@ -77,8 +81,8 @@ class MainFragment : Fragment(), SearchView.OnQueryTextListener {
         return true
     }
 
-    override fun onQueryTextChange(newText: String?): Boolean  {
-        if(newText.isNullOrBlank()){
+    override fun onQueryTextChange(newText: String?): Boolean {
+        if (newText.isNullOrBlank()) {
             viewModel.clearList()
         }
         return true
