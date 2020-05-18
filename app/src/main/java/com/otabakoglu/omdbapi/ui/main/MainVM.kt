@@ -22,7 +22,7 @@ class MainVM @Inject constructor(private val repository: RepositoryImpl) : ViewM
 
     fun clearList() {
         _properties.value = emptyList()
-        _status.value = OmdbApiStatus.DONE
+        _status.value = OmdbApiStatus.SEARCH
     }
 
     fun getFilm(title: String) {
@@ -32,6 +32,7 @@ class MainVM @Inject constructor(private val repository: RepositoryImpl) : ViewM
 
                 _status.value = OmdbApiStatus.LOADING
 
+                delay(300)
                 val result = repository.getFilmByTitleAsync(title).await()
 
                 if (result.isResponse()) {
